@@ -48,7 +48,10 @@ public class Produit implements Serializable {
 	@JsonIgnore
 	private CategorieProduit categorieProduit;
 	
-
+ public   Produit(Long id,String code){
+	this.idProduit = id;
+	this.codeProduit = code;
+}
 
 	
 
