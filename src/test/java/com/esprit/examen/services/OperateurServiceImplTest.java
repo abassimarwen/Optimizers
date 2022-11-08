@@ -76,6 +76,10 @@ public class OperateurServiceImplTest {
         }).when(operateurRepository).deleteById(ArgumentMatchers.anyLong());
         operateurService.deleteOperateur(operateurDeleteTest.getIdOperateur());
     }
+    @Test
+    public void voidT(){
+        
+    }
 
     @Test
     public void updateOperateur() {
