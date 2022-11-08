@@ -3,6 +3,7 @@ package com.esprit.examen.services;
 import com.esprit.examen.entities.Produit;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -24,7 +25,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ProduitServiceImplTest {
     @Autowired
     IProduitService produitService;
+
     @Test
+    @DisplayName("add produit test")
     @Order(1)
     public void testAddProduit()  {
         Produit produitToAddTest = new Produit("addtest","libelleTest", (float) 2.2);
@@ -37,6 +40,7 @@ public class ProduitServiceImplTest {
         produitService.deleteProduit(produitToAddTest.getIdProduit());
     }
     @Test
+    @DisplayName("retreive all produits test")
     @Order(2)
     public void retreiveAllProduitTest(){
         Produit p1 = new Produit("retrieveAlltest1","libelleTest", (float) 2.2);
@@ -53,6 +57,7 @@ public class ProduitServiceImplTest {
 
     }
     @Test
+    @DisplayName("delete produit test")
     @Order(3)
     public void testDeleteProduit(){
         Produit produitToDeleteTest = new Produit("deleteTest","liblee",(float) 1.1);
@@ -61,6 +66,7 @@ public class ProduitServiceImplTest {
         assertNull(produitService.retrieveProduit(produitToDeleteTest.getIdProduit()));
     }
     @Test
+    @DisplayName("update produit test")
     @Order(4)
     public void testUpdateProduit(){
         Produit produitToUpdateTest = new Produit("beforeUpdateTest","liblee",(float) 1.1);
