@@ -77,11 +77,6 @@ public class OperateurServiceImplTest {
         operateurService.deleteOperateur(operateurDeleteTest.getIdOperateur());
     }
     @Test
-    public void voidT(){
-        
-    }
-
-    @Test
     public void updateOperateur() {
         Operateur operateurAddTest = new Operateur("nomOp", "prenomOp", "xxxx");
         when(operateurRepository.save(ArgumentMatchers.any(Operateur.class))).thenReturn(operateurAddTest);
