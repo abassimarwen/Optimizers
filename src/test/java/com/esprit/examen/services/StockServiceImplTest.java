@@ -1,16 +1,17 @@
 package com.esprit.examen.services;
 
-import com.esprit.examen.entities.Stock;
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.*;
+import com.esprit.examen.entities.Stock;
+import com.esprit.examen.entities.Stock;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -20,7 +21,7 @@ public class StockServiceImplTest {
     List<Stock> stocks = new ArrayList<>();
 
     @Test
-   public void getAllStock() {
+    public void getAllStock() {
         assertNotEquals(stocks,stockService.retrieveAllStocks());
     }
 
@@ -46,19 +47,4 @@ public class StockServiceImplTest {
         stockService.deleteStock(savedStock.getIdStock());
         assertNull(stockService.retrieveStock(savedStock.getIdStock()));
     }
-    @Test
-    public void testgetStock() {
-        assertNotNull(stockService.retrieveStock(1L));
-    }
-    /*@Test
-    public void testupdateStock(Stock stocks) {
-        stocks.setIdStock(2L);
-        clt.setEmail("hello@gmail.com");
-        clt.setPhone("+212654657600");
-        clt.setFullname("hello hello");
-        clt.setAge(12);
-        clt.setSex("homme");
-        clt.setIsActive(true);
-        assertNotEquals(null,clientService.updateClient(clt));
-    }*/
 }

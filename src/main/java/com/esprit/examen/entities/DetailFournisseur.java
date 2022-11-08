@@ -1,5 +1,4 @@
 package com.esprit.examen.entities;
-
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -33,5 +32,5 @@ public class DetailFournisseur implements Serializable{
 	@OneToOne(mappedBy="detailFournisseur")
 	@JsonIgnore
 	private Fournisseur fournisseur;
-	
+
 }

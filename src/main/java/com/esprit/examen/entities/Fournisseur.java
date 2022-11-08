@@ -26,6 +26,14 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Fournisseur implements Serializable {
 
+
+
+	public Fournisseur(Long idFournisseur, String code, String libelle) {
+		super();
+		this.idFournisseur = idFournisseur;
+		this.code = code;
+		this.libelle = libelle;
+	}
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -38,12 +46,30 @@ public class Fournisseur implements Serializable {
 	@OneToMany(mappedBy="fournisseur")
 	@JsonIgnore
 	private Set<Facture> factures;
-    @ManyToMany
-    @JsonIgnore
-    private Set<SecteurActivite> secteurActivites;
-    @OneToOne(cascade= CascadeType.ALL,fetch=FetchType.EAGER)
-    private DetailFournisseur detailFournisseur;
-    
+	@ManyToMany
+	@JsonIgnore
+	private Set<SecteurActivite> secteurActivites;
+	@OneToOne(cascade= CascadeType.ALL,fetch=FetchType.EAGER)
+	private DetailFournisseur detailFournisseur;
+	public Long getIdFournisseur() {
+		return idFournisseur;
+	}
+	public void setIdFournisseur(Long idFournisseur) {
+		this.idFournisseur = idFournisseur;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getLibelle() {
+		return libelle;
+	}
+	public void setLibelle(String libelle) {
+		this.libelle = libelle;
+	}
 
-	
+
+
 }
