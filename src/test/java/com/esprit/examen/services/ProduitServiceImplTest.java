@@ -6,7 +6,10 @@ import org.junit.Test;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,9 +24,12 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(SpringRunner.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @Slf4j
+@ExtendWith(MockitoExtension.class)
 public class ProduitServiceImplTest {
     @Autowired
     IProduitService produitService;
+    @Mock
+    IStockService stockService;
     @Test
     @Order(1)
     public void testAddProduit()  {
