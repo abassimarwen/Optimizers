@@ -28,6 +28,7 @@ public class OperateurServiceImpl implements IOperateurService {
 		operateurRepository.deleteById(id);
 		
 	}
+	//test
 
 	@Override
 	public Operateur updateOperateur(Operateur o) {
