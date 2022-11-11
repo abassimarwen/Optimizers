@@ -76,7 +76,6 @@ public class OperateurServiceImplTest {
         }).when(operateurRepository).deleteById(ArgumentMatchers.anyLong());
         operateurService.deleteOperateur(operateurDeleteTest.getIdOperateur());
     }
-
     @Test
     public void updateOperateur() {
         Operateur operateurAddTest = new Operateur("nomOp", "prenomOp", "xxxx");
