@@ -4,7 +4,7 @@ WORKDIR /tpachat
 COPY . .
 COPY pom.xml .
 COPY src ./src
-RUN mvn -T 10 clean package -nsu -Dmaven.test.skip -DskipTests
+RUN mvn -o -T 10 clean package -nsu -Dmaven.test.skip -DskipTests
 
 
 CMD mvn spring-boot:run
