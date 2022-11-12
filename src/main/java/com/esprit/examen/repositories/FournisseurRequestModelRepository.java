@@ -1,4 +1,7 @@
 package com.esprit.examen.repositories;
 
-public class FournisseurRequestModelRepository {
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface FournisseurRequestModelRepository {
 }
