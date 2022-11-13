@@ -40,6 +40,8 @@ public class OperateurServiceImpl implements IOperateurService {
 	public Operateur retrieveOperateur(Long id) {
 		return operateurRepository.findById(id).orElse(null);
 	}
-	
+	 public void test(){
+		
+	 }
 
 }
