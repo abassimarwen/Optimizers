@@ -1,39 +1,68 @@
 package com.esprit.examen.services;
 
+import com.esprit.examen.entities.Operateur;
 import com.esprit.examen.entities.Stock;
+import com.esprit.examen.repositories.ProduitRepository;
+import com.esprit.examen.repositories.StockRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.ArgumentMatchers;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class StockServiceImplTest {
-    @Autowired
-    IStockService stockService;
-    List<Stock> stocks = new ArrayList<>();
+
+    @Mock
+    ProduitRepository produitRepository;
+    @Mock
+    StockRepository stockRepository;
+    @InjectMocks
+    StockServiceImpl stockService;
+
 
     @Test
    public void getAllStock() {
-        assertNotEquals(stocks,stockService.retrieveAllStocks());
+
+        Stock s1 = new Stock("retrivestocktest1",10,100);
+        Stock s2 = new Stock("retrivestocktest2",10,100);
+        Stock s3 = new Stock("retrivestocktest3",10,100);
+
+        List<Stock> stockList = new ArrayList<>();
+        stockList.add(s1);
+        stockList.add(s2);
+        stockList.add(s3);
+        when(stockRepository.findAll()).thenReturn(stockList);
+        List<Stock> listToCheck = stockService.retrieveAllStocks();
+        verify(stockRepository).findAll();
+        assertNotNull(listToCheck);
+        assertTrue(listToCheck.size() > 1);
+        assertEquals(3, listToCheck.size());
+        assertSame(stockList, listToCheck);
     }
 
     @Test
     public void testAddStock() {
-        List<Stock> stocks = stockService.retrieveAllStocks();
-        int expected=stocks.size();
-        Stock s = new Stock("stock test",10,100);
-        Stock savedStock= stockService.addStock(s);
-
-        assertEquals(expected+1, stockService.retrieveAllStocks().size());
+        Stock stock = new Stock("addstocktest",10,100);
+        when(stockRepository.save(ArgumentMatchers.any(Stock.class))).thenReturn(stock);
+        Stock savedStock= stockService.addStock(stock);
+        verify(stockRepository).save(stock);
         assertNotNull(savedStock.getLibelleStock());
-        stockService.deleteStock(savedStock.getIdStock());
+        assertEquals(savedStock,stock);
+        assertSame(savedStock,stock);
 
     }
 
@@ -41,24 +70,32 @@ public class StockServiceImplTest {
 
     @Test
     public void testDeleteStock() {
-        Stock s = new Stock("stock test",30,60);
-        Stock savedStock= stockService.addStock(s);
-        stockService.deleteStock(savedStock.getIdStock());
-        assertNull(stockService.retrieveStock(savedStock.getIdStock()));
+        Stock stockToDeleteTest = new Stock("deletestocktest",30,60);
+        doAnswer(s-> {
+                    verify(stockRepository).deleteById(stockToDeleteTest.getIdStock());
+                    assertSame(s, stockToDeleteTest);
+                    return null;
+        }).when(stockRepository).deleteById(ArgumentMatchers.anyLong());
+        stockService.deleteStock(stockToDeleteTest.getIdStock());
     }
+
     @Test
     public void testgetStock() {
-        assertNotNull(stockService.retrieveStock(1L));
+        Stock stockToRetriveTest = new Stock("gettocktest",30,60);
+        Operateur operateurToRetreiveTest = new Operateur("nomOp", "prenomOp", "xxxx");
+        when(stockRepository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(stockToRetriveTest));
+        Stock retrieved =  stockService.retrieveStock(stockToRetriveTest.getIdStock());
+        verify(stockRepository).findById(operateurToRetreiveTest.getIdOperateur());
     }
-    /*@Test
-    public void testupdateStock(Stock stocks) {
-        stocks.setIdStock(2L);
-        clt.setEmail("hello@gmail.com");
-        clt.setPhone("+212654657600");
-        clt.setFullname("hello hello");
-        clt.setAge(12);
-        clt.setSex("homme");
-        clt.setIsActive(true);
-        assertNotEquals(null,clientService.updateClient(clt));
-    }*/
+    @Test
+    public void testUpdateStock() {
+        Stock stock = new Stock("updatestocktest",30,60);
+        when(stockRepository.save(ArgumentMatchers.any(Stock.class))).thenReturn(stock);
+        Stock stocktToUpdate = stockService.updateStock(stock);
+        verify(stockRepository).save(stock);
+        assertNotNull(stocktToUpdate);
+        assertEquals(stocktToUpdate, stock);
+        assertSame(stocktToUpdate, stock);
+    }
+
 }
