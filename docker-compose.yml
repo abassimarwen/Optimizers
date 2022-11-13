@@ -12,10 +12,10 @@ services:
     ports:
         - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
     volumes:
-        - db:/var/lib/mysql
+        - /home/mysql/data:/var/lib/mysql
   backend:
     container_name: devopsproject
-    image: marwen14/devops:latest
+    image: marwen14/devops:97
     restart: on-failure
     env_file: ./.env
     ports:
@@ -30,9 +30,3 @@ services:
           }'
     depends_on:
       - "bd"
-  frontend:
-    container_name: devopsangular
-    image: devopsprojectclient
-    restart: on-failure
-    ports:
-      - "4200:4200"
