@@ -43,6 +43,8 @@ public class Facture implements Serializable {
     @OneToMany(mappedBy="facture")
     @JsonIgnore
     private Set<Reglement> reglements;
-
+    
+    public Facture(int i, int i1, Date date, Date date1, boolean b) {
+    }
 	
 }
