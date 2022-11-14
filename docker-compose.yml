@@ -15,7 +15,7 @@ services:
         - /home/mysql/data:/var/lib/mysql
   backend:
     container_name: devopsproject
-    image: marwen14/devops:97
+    image: marwen14/devops:latest
     restart: on-failure
     env_file: ./.env
     ports:
