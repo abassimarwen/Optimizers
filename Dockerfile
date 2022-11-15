@@ -1,7 +1,7 @@
 
 FROM maven:3.8.2-jdk-8
 
-WORKDIR C/Users/user/Downloads/devops
+WORKDIR /tpachats
 COPY . .
 COPY pom.xml .
 COPY src ./src
