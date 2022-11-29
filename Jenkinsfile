@@ -1,5 +1,10 @@
 pipeline {
-  agent any 
+  agent any
+  
+  environment{
+  dockerImage =''
+  }
+  
     stages{
       stage('Git Checkout'){
          steps{
@@ -16,10 +21,11 @@ pipeline {
            sh """ls"""
          }
       }
-      stage('Build'){
+      stage('Build Docker Image'){
          steps{
            script{
-             sh """sudo docker build ."""
+             dockerImage = docker.build registry
+             
            }
          }
       }
