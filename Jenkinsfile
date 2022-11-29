@@ -6,5 +6,10 @@ pipeline {
            git branch: 'main', url: 'https://github.com/abassimarwen/Optimizers-core.git'
          }
       }
+      stage('Unit Testing'){
+         steps{
+           sh 'mvn test'
+         }
+      }
     }  
 }
