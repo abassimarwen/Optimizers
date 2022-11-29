@@ -6,9 +6,9 @@ pipeline {
            git branch: 'main', url: 'https://github.com/abassimarwen/Optimizers-core.git'
          }
       }
-      stage('Unit Testing'){
+      stage('Testing maven'){
          steps{
-           sh 'mvn test'
+           sh """mvn -version"""
          }
       }
     }  
