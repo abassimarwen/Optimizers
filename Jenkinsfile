@@ -14,7 +14,7 @@ pipeline {
       stage('Build Docker Image'){
          steps{
            script{
-             sh 'docker build -t monimage0:1.0.0 .'
+             sh """docker build -t mon_image ."""
            }
          }
       }
