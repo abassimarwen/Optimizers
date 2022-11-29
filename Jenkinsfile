@@ -11,16 +11,17 @@ pipeline {
            sh """mvn -version"""
          }
       }
-      //stage('Build Docker Image'){
-         //steps{
-          // script{
-            // sh """sudo docker build -t mon_image ."""
-           //}
-        // }
-      //}
       stage('ls'){
          steps{
            sh """ls"""
+         }
+      }
+      stage('Build'){
+         steps{
+           script{
+             sh """sudo su"""
+             sh """docker build ."""
+           }
          }
       }
     }  
