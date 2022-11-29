@@ -19,7 +19,6 @@ pipeline {
       stage('Build'){
          steps{
            script{
-             sh """sudo su"""
              sh """docker build ."""
            }
          }
